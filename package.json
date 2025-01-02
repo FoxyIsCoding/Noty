@@ -12,7 +12,7 @@
         "id": "noty",
         "resizable": true,
         "show": true,
-        "show_in_taskbar": true,
+        "show_in_taskbar": false,
         "title": "Noty",
         "visible": true
     }

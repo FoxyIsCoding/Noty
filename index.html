@@ -13,7 +13,7 @@
 <body>
     <div id="sidebar">
         <button onclick="openNote(null)" id="home"><i style="color: white;" class="fa fa-home"></i></button>
-        <a href="#" class="addnote_btn" onclick="createNote()" ><i class="fa-solid fa-plus"></i>&nbsp; Add note</a> 
+        <a class="addnote_btn" onclick="createNote()" ><i class="fa-solid fa-plus"></i>&nbsp; Add note</a> 
         <p></p><p></p>
         <hr class="solid">
         <br>
@@ -22,7 +22,7 @@
 
     <article>
         <div id="createNote" style="display: none;">
-            <input maxlength="30" value="Untitled" id="titleDisplay" readonly autocomplete="off">
+            <input maxlength="30" value="Untitled" id="titleDisplay" readonly">
             <br><br><br>
             <textarea id="contentDisplay" placeholder="Write your note here..."></textarea>
         </div>
