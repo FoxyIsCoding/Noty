@@ -17,12 +17,6 @@
         <ul id="notesList"></ul>
     </div>
 
-    <div id="deleteNote">
-        <p>Do you want to delete this note?</p>
-        <button onclick="removeNote(1)">Yes</button>
-        <button onclick="removeNote(2)">No</button>
-    </div>
-
     <article>
         <div id="createNote" style="display: none;">
             <input value="Untitled" id="titleDisplay" readonly>
@@ -32,7 +26,7 @@
         
     </article>
     <div id="toolbar">
-        <i style="color: white; margin-left: 50%; margin-top: 9%; cursor: pointer;" class="fa fa-trash fa-xl"></i>
+        <i onclick="removeNote()" style="color: white; margin-left: 50%; margin-top: 9%; cursor: pointer;" class="fa fa-trash fa-xl"></i>
         <i id="" onclick='alert("WORK IN PROGRESS")' style="color: white; margin-left: 10%; margin-top: 9%; cursor: pointer;" class="fa-regular fa-square fa-xl"></i>
         <i id="" onclick='alert("WORK IN PROGRESS")' style="color: white; margin-left: 10%; margin-top: 9%; cursor: pointer;" class="fa-solid fa-gear fa-xl"></i>
     </div>

@@ -23,7 +23,7 @@ function save() {
 function loadNotes() {
   document.getElementById("notesList").innerHTML = ""
   for (let i = 0;i<notes.length;i++) {
-    document.getElementById("notesList").innerHTML += `<li onclick="openNote(${i})">${notes[i].title}</li>`
+    document.getElementById("notesList").innerHTML += `<li ondblclick="removeNote()" onclick="openNote(${i})">${notes[i].title}</li>`
   }
 }
 loadNotes()
@@ -45,6 +45,15 @@ function openNote(index) {
   document.getElementById("createNote").style.display = "block"
   document.getElementById("titleDisplay").value = notes[selectedNote].title
   document.getElementById("contentDisplay").value = notes[selectedNote].note
+}
+
+function removeNote() {
+  if (!confirm("Do you want to delete this note?") && notes.length > 0) {return}
+  document.getElementById("createNote").style.display = "none"
+  notes.splice(selectedNote, 1)
+  selectedNote = null
+  loadNotes()
+  save()
 }
 
 document.getElementById("titleDisplay").addEventListener("dblclick", function() {
