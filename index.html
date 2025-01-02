@@ -5,26 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Noty</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
     <script src="https://kit.fontawesome.com/231816e55b.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div id="sidebar">
-        <a href="#" class="addnote_btn" onclick="addNoteBTNclicked()" ><i class="fa-solid fa-plus"></i>&nbsp; Add note</a> 
+        <button onclick="openNote(null)" id="home"><i style="color: white;" class="fa fa-home"></i></button>
+        <a href="#" class="addnote_btn" onclick="createNote()" ><i class="fa-solid fa-plus"></i>&nbsp; Add note</a> 
         <p></p><p></p>
         <hr class="solid">
         <br>
-        <ul id="notesList">
-            <li>Example Note</li>
-            <li>Long name note with lots of characters is supported</li>
-            <li>Best note</li>
-            <li>Some sick note</li>
-            <li>Noty</li>
-            <li>Note with emojis 💀💀💩</li>
-            <li>nothing 🙃</li>
-        </ul>
+        <ul id="notesList"></ul>
     </div>
 
-    <h1 class="noNote">You dont have anything opened.</h1>
+    <article>
+        <div id="createNote" style="display: none;">
+            <input value="Untitled" id="titleDisplay" readonly>
+            <br><br><br>
+            <textarea id="contentDisplay" placeholder="Write your note here..."></textarea>
+        </div>
+        
+    </article>
+    <div id="toolbar">
+        <i onclick="removeNote()" style="color: white; margin-left: 50%; margin-top: 9%; cursor: pointer;" class="fa fa-trash fa-xl"></i>
+        <i id="" onclick='alert("WORK IN PROGRESS")' style="color: white; margin-left: 10%; margin-top: 9%; cursor: pointer;" class="fa-regular fa-square fa-xl"></i>
+        <i id="" onclick='alert("WORK IN PROGRESS")' style="color: white; margin-left: 10%; margin-top: 9%; cursor: pointer;" class="fa-solid fa-gear fa-xl"></i>
+    </div>
 </body>
 </html>
+<script src="script.js"></script>
