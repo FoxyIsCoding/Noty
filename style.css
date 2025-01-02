@@ -1,0 +1,97 @@
+/* ----------------------------- Variables ------------------------------- */
+:root {
+    --bg-primary: #1C1C1C;
+    --bg-secondary: #232323;
+    --text: #fff;
+  }
+  
+/*  body { background-color: var(--blue); } */
+
+
+/* ----------------------------- Main parts ---------------------------- */
+
+html, body {
+    background-color: var(--bg-primary);
+    height: 100%;
+    overflow: hidden;
+    
+}
+
+.noNote {
+    position:absolute;
+    text-align: center;
+    color: var(--text);
+    margin-top: 25%;
+    margin-left: 45%;
+    z-index: 100;
+    user-select: none;
+}
+
+/* ----------------------------- Side BAR ---------------------------- */
+
+#sidebar {
+    position:absolute;
+    z-index: 1;
+    height: 98%;
+    width: 20%;
+    background-color: var(--bg-secondary);
+    border-radius: 10px;
+    -webkit-box-shadow: 23px 26px 40px -34px rgba(0,0,0,0.75);
+    -moz-box-shadow: 23px 26px 40px -34px rgba(0,0,0,0.75);
+    box-shadow: 23px 26px 40px -34px rgba(0,0,0,0.75);
+}
+
+#notesList {
+    user-select: none;
+    list-style-type: none;
+    color: var(--text);
+}
+
+li {
+    padding-left: 5%;
+    padding-top: 2%;
+    padding-bottom: 5%;
+    transition: 0.3s;
+}
+
+li:hover {
+    cursor: pointer;
+    background-color: #161515;
+    border-top-left-radius: 9px;
+    border-bottom-left-radius: 9px;
+
+}
+
+
+/* ----------------------------- Buttons ---------------------------- */
+
+
+.addnote_btn {
+    margin-top: 5%;
+    margin-left: 50%;
+	box-shadow: 7px 8px 33px -11px #000000;
+	background-color:#201e1e;
+	border-radius:28px;
+	border:1px solid #1b1c1b;
+	display: inline-flex;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:5% 10%;
+	text-decoration:none;
+    transition: 0.3s;
+    user-select: none;
+}
+.addnote_btn:hover {
+	background-color:#1d1b1b;
+}
+.addnote_btn:active {
+	position:relative;
+	top:1px;
+}
+
+hr.solid {
+    border-top: 1px solid #ffffff;
+    width: 90%;
+}
