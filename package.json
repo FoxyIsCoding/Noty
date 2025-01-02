@@ -1,0 +1,24 @@
+{
+    "app_name": "_Notyy",
+    "description": "Simple note taking app",
+    "main": "index.html",
+    "name": "_Notyy",
+    "version": "0.1.0",
+    "webkit": {},
+    "window": {
+        "frame": true,
+        "height": 598,
+        "icon": "icon.png",
+        "id": "noty",
+        "max_height": 598,
+        "max_width": 1359,
+        "min_height": 598,
+        "min_width": 1359,
+        "resizable": true,
+        "show": true,
+        "show_in_taskbar": true,
+        "title": "Noty",
+        "visible": true,
+        "width": 1359
+    }
+}

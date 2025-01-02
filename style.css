@@ -17,14 +17,28 @@ html, body {
     font-family: sans-serif;
 }
 
-.noNote {
-    position:absolute;
+#deleteNote {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--bg-secondary);
+    padding: 20px;
+    border-radius: 20px;
     text-align: center;
-    color: var(--text);
-    margin-top: 25%;
-    margin-left: 45%;
-    z-index: 100;
-    user-select: none;
+    color: white;
+    font-size: 20px;
+    display: none;
+}
+#deleteNote button {
+    background: #1e1e1e;
+    border: none;
+    padding: 10px 20px;
+    box-shadow: 7px 8px 33px -11px #000000;
+    border-radius: 10px;
+    color: white;
+    font-size: 15px;
+    margin: 0 10px;
 }
 
 /* ----------------------------- Side BAR ---------------------------- */
@@ -123,7 +137,7 @@ hr.solid {
 	top:1px;
 }
 
-
+/* Hello :3 */
 /* ----------------------------- Scroll Bar ---------------------------- */
 
 
@@ -233,10 +247,10 @@ article {
     position: fixed;
     z-index: 100;
     width: 20%;
-    height: 50%;
+    height: 7%;
     margin-left: 80%;
-    margin-top: 45%;
-    border-radius: 12px;
+    bottom: 0;
+    border-top-left-radius: 9px;
     background-color: #181818;
     border: none;
 }
