@@ -152,3 +152,25 @@ function openTodo() {
   document.getElementById("todo").style.display = "block"
   document.getElementById("homePage").style.display = "none"
 }
+
+document.getElementById("search").addEventListener("input", function() {
+  const query = this.value.toLowerCase();
+  const notesList = document.getElementById("notesList");
+  const notes = notesList.getElementsByTagName("li");
+
+  if (query === "") {
+    // Show all notes if search bar is empty
+    for (let note of notes) {
+      note.style.display = "block";
+    }
+  } else {
+    for (let note of notes) {
+      const noteText = note.textContent.toLowerCase();
+      if (noteText.includes(query)) {
+        note.style.display = "block";
+      } else {
+        note.style.display = "none";
+      }
+    }
+  }
+});
