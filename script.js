@@ -33,6 +33,7 @@ function loadNotes() {
 loadNotes()
 
 function createNote() {
+  document.getElementById("homePage").style.display = "none"
   document.getElementById("todo").style.display = "no"
   document.getElementById("createNote").style.display = "block"
   notes.unshift({"title":"Untitled","note":""})
@@ -46,8 +47,10 @@ function openNote(index) {
   selectedNote = index
   if (selectedNote == null) {
     document.getElementById("createNote").style.display = "none"
+    document.getElementById("homePage").style.display = "block"
     return
   }
+  document.getElementById("homePage").style.display = "none"
   document.getElementById("createNote").style.display = "block"
   document.getElementById("titleDisplay").value = notes[selectedNote].title
   document.getElementById("contentDisplay").value = notes[selectedNote].note
@@ -141,4 +144,11 @@ function resetLocalStorage() {
 document.getElementById("openDoList").addEventListener("click", function() {
   document.getElementById("createNote").style.display = "none"
   document.getElementById("todo").style.display = "block"
+  document.getElementById("homePage").style.display = "none"
 })
+
+function openTodo() {
+  document.getElementById("createNote").style.display = "none"
+  document.getElementById("todo").style.display = "block"
+  document.getElementById("homePage").style.display = "none"
+}

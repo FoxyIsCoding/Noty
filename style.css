@@ -2,6 +2,7 @@
 :root {
     --bg-primary: #1C1C1C;
     --bg-secondary: #232323;
+    --bg-hover: #141414;
     --text: #fff;
   }
   
@@ -137,6 +138,31 @@ hr.solid {
 #home:active {
 	position:relative;
 	top:1px;
+}
+
+#shortcut {
+  margin-top: 7%;
+  margin-left: 7%;
+  box-shadow: 7px 8px 33px -11px #000000;
+  background-color:#201e1e;
+  border-radius:10px;
+  border:1px solid #1b1c1b;
+  display: inline-flex;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-size:17px;
+  padding:10% 10%;
+  text-decoration:none;
+  transition: 0.3s;
+  user-select: none;
+}
+#shortcut:hover {
+  background-color:#1a1a1a;
+}
+#shortcut:active {
+  position:relative;
+  top:1px;
 }
 
 /* Hello :3 */
@@ -300,4 +326,49 @@ article {
 #todoList div i {
   margin-right: 15px;
   font-size: 20px;
+}
+
+/* ----------------------------- Home Page ---------------------------- */
+
+#homePageIntro {
+  margin-top: 6%;
+  position: fixed;
+  background-color: var(--bg-secondary);
+  color: var(--text);
+  width: 20%;
+  padding: 3%;
+  transition: 0.3s;
+  border-radius: 10px;
+}
+
+#homePageIntro:hover {
+  background-color: var(--bg-hover);
+}
+
+#shortcuts {
+  margin-top: 6%;
+  position: fixed;
+  color: var(--text);
+  width: 240px;
+  height: 200px;
+  margin-left: 28%;
+  transition: 0.3s;
+  border-radius: 10px;
+}
+
+
+/* ----------------------------- SEARCH ---------------------------- */
+
+#search {
+  position: fixed;
+  color: var(--text);
+  width: 35%;
+  padding-left: 1%;
+  margin-left: 15%;
+  height: 7%;
+  transition: 0.3s;
+  border-radius: 10px;
+  border: none;
+  font-size: 20px;
+  background-color: var(--bg-secondary);
 }
