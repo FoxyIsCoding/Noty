@@ -5,7 +5,7 @@
         "download_dir": "",
         "export_dir": "F:\\_Coding\\Html\\NotyOutput",
         "force_download": false,
-        "nw_compression_level": 3,
+        "nw_compression_level": 7,
         "nw_version": "0.94.0",
         "output_pattern": "",
         "sdk_build": false,

@@ -15,6 +15,7 @@ html, body {
     height: 100%;
     overflow: hidden;
     font-family: sans-serif;
+    user-select: none;
 }
 
 #deleteNote {
@@ -71,6 +72,7 @@ li {
 }
 
 li:hover {
+    margin-left: 5%;
     cursor: pointer;
     background-color: #161515;
     border-top-left-radius: 9px;
@@ -217,6 +219,7 @@ article {
     margin-top: 5%;
     background-color: var(--bg-primary);
     border: none;
+    font-family: 'Hammersmith One';
     border-bottom: 2px solid rgb(255, 255, 255);
 }
 
@@ -253,4 +256,48 @@ article {
     border-top-left-radius: 9px;
     background-color: #181818;
     border: none;
+}
+
+/* ----------------------------- Todo ---------------------------- */
+
+#todo h2 {
+  color: white;
+  position: relative;
+  font-size: 30px;
+  font-family: 'Hammersmith One';
+}
+
+#todo h2::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translate(-70%);
+  width: 70%;
+  user-select: none;
+  border-bottom: white 2px solid;
+}
+
+#todoList div {
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+#todoAdd {
+  color: white;
+  background: var(--bg-secondary);
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 20px 0;
+  padding: 10px 30px;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 7px 8px 33px -11px #000000;
+}
+
+#todoList div i {
+  margin-right: 15px;
+  font-size: 20px;
 }
