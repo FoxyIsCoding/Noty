@@ -21,21 +21,6 @@
     </div>
 
     <article>
-        <input type="text" id="search" placeholder="Search notes..." autocomplete="off">
-        <div id="homePage"> <div id="homePageIntro">
-            <h1>Welcome to Noty</h1>
-            <p>Click on the <i class="fa-solid fa-plus"></i> icon to add a note</p>
-            <p>Click on a note to view or edit it</p>
-        </div>
-        <div id="shortcuts">
-            <button onclick="createNote()" title="Add note" id="shortcut"><i class="fa-solid fa-plus fa-xl"></i></button>
-            <button title="ToDo" id="shortcut" onclick="openTodo()"><i class="fa-solid fa-check-square fa-xl"></i></button>
-            <button onclick='alert("I was too lazy to code this 🙃")' title="Settings" id="shortcut"><i class="fa-solid fa-gear fa-xl"></i></button>
-            <button onclick="resetLocalStorage()" title="Reset data" id="shortcut"><i class="fa-solid fa-rotate-right fa-xl"></i></button>
-        </div>
-        
-        </div>  
-
         <div id="createNote" style="display: none;">
             <input maxlength="30" value="Untitled" id="titleDisplay" readonly">
             <br><br><br>
@@ -50,10 +35,10 @@
         </section>
     </article>
     <div id="toolbar">
-        <i title="Remove note" onclick="removeNote()" style="color: white; margin-left: 30%; margin-top: 9%; cursor: pointer;" class="fa fa-trash fa-xl"></i>
-        <i title="ToDo" id="openDoList" style="color: white; margin-left: 10%; margin-top: 9%; cursor: pointer;" class="fa-regular fa-check-square fa-xl"></i>
-        <i title="Settings" id="" onclick='alert("I was too lazy to code this 🙃")' style="color: white; margin-left: 10%; margin-top: 9%; cursor: pointer;" class="fa-solid fa-gear fa-xl"></i>
-        <i title="Reset data" onclick="resetLocalStorage()" style="color: white; margin-left: 10%; margin-top: 9%; cursor: pointer;" class="fa-solid fa-rotate-right fa-xl"></i>
+        <i onclick="removeNote()" style="color: white; margin-left: 30%; margin-top: 9%; cursor: pointer;" class="fa fa-trash fa-xl"></i>
+        <i id="openDoList" style="color: white; margin-left: 10%; margin-top: 9%; cursor: pointer;" class="fa-regular fa-check-square fa-xl"></i>
+        <i id="" onclick='alert("I was too lazy to code this 🙃")' style="color: white; margin-left: 10%; margin-top: 9%; cursor: pointer;" class="fa-solid fa-gear fa-xl"></i>
+        <i onclick="resetLocalStorage()" style="color: white; margin-left: 10%; margin-top: 9%; cursor: pointer;" class="fa-solid fa-rotate-right fa-xl"></i>
     </div>
 </body>
 </html>
