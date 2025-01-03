@@ -27,8 +27,27 @@ function save() {
 function loadNotes() {
   document.getElementById("notesList").innerHTML = ""
   for (let i = 0;i<notes.length;i++) {
-    document.getElementById("notesList").innerHTML += `<li ondblclick="removeNote()" onclick="openNote(${i})">${notes[i].title}</li>`
+    document.getElementById("notesList").innerHTML += `<span color="${notes[i].tag}" class="tagDot"></span><li draggable="true" ondblclick="removeNote()" onclick="openNote(${i})">${notes[i].title}</li>`
   }
+
+  document.querySelectorAll("#notesList li").forEach(item => {
+    item.addEventListener("dragstart", function(e) {
+      e.dataTransfer.setData("text", notes.indexOf(notes.find(note => note.title === e.target.textContent)))
+    })
+    item.addEventListener("dragover", function(e) {
+      e.preventDefault()
+    })
+    item.addEventListener("drop", function(e) {
+      const draggedIndex = e.dataTransfer.getData("text")
+      const droppedIndex = notes.indexOf(notes.find(note => note.title === e.target.textContent))
+      const temp = notes[draggedIndex]
+      notes[draggedIndex] = notes[droppedIndex]
+      notes[droppedIndex] = temp
+      selectedNote = droppedIndex
+      loadNotes()
+      save()
+    })
+  })
 }
 loadNotes()
 
@@ -36,7 +55,7 @@ function createNote() {
   document.getElementById("homePage").style.display = "none"
   document.getElementById("todo").style.display = "no"
   document.getElementById("createNote").style.display = "block"
-  notes.unshift({"title":"Untitled","note":""})
+  notes.unshift({"title":"Untitled","note":"","tag":0})
   loadNotes()
   save()
   openNote(0)
@@ -54,6 +73,7 @@ function openNote(index) {
   document.getElementById("createNote").style.display = "block"
   document.getElementById("titleDisplay").value = notes[selectedNote].title
   document.getElementById("contentDisplay").value = notes[selectedNote].note
+  document.getElementById("tagDisplay").innerText = notes[selectedNote].tag == 0 ? "Unset" : notes[selectedNote].tag == 1 ? "Uneeded" : notes[selectedNote].tag == 2 ? "Important" : notes[selectedNote].tag == 3 ? "Urgent" : "Done"
 }
 
 function removeNote() {
@@ -91,6 +111,20 @@ function loadTodo() {
   })
 }
 loadTodo()
+
+function changeTag(item) {
+  notes[selectedNote].tag += 1
+  if (notes[selectedNote].tag > 4) {
+    notes[selectedNote].tag = 0
+  }
+  if (notes[selectedNote].tag == 0) {item.innerText = "Unset"}
+  else if (notes[selectedNote].tag == 1) {item.innerText = "Uneeded"}
+  else if (notes[selectedNote].tag == 2) {item.innerText = "Important"}
+  else if (notes[selectedNote].tag == 3) {item.innerText = "Urgent"}
+  else if (notes[selectedNote].tag == 4) {item.innerText = "Done"}
+  loadNotes()
+  save()
+}
 
 document.getElementById("titleDisplay").addEventListener("dblclick", function() {
   this.removeAttribute("readonly")
@@ -159,7 +193,6 @@ document.getElementById("search").addEventListener("input", function() {
   const notes = notesList.getElementsByTagName("li");
 
   if (query === "") {
-    // Show all notes if search bar is empty
     for (let note of notes) {
       note.style.display = "block";
     }

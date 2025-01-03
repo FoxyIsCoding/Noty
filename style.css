@@ -2,7 +2,7 @@
 :root {
     --bg-primary: #1C1C1C;
     --bg-secondary: #232323;
-    --bg-hover: #141414;
+    --bg-hover: #1a1919;
     --text: #fff;
   }
   
@@ -63,6 +63,10 @@ html, body {
     color: var(--text);
     max-height: 80%;
     overflow-y: auto;
+    display: grid;
+    grid-template-columns: 1fr 7fr;
+    grid-gap: 10px;
+    align-items: center;
 }
 
 li {
@@ -75,7 +79,7 @@ li {
 li:hover {
     margin-left: 5%;
     cursor: pointer;
-    background-color: #161515;
+    background-color: #292929;
     border-top-left-radius: 9px;
     border-bottom-left-radius: 9px;
 
@@ -213,12 +217,12 @@ ul {
   textarea::-webkit-scrollbar-track {
     background: var(--sb-track-color);
     border-radius: 3px;
+    cursor: default;
   }
   
   textarea::-webkit-scrollbar-thumb {
     background: var(--sb-thumb-color);
     border-radius: 3px;
-    
   }
   
   @supports not selector(::-webkit-scrollbar) {
@@ -258,7 +262,7 @@ article {
     color: var(--text);
     font-size: 20px;
     margin-left: 5%;
-    margin-top: 5%;
+    margin-top: 8%;
     background-color: var(--bg-primary);
     border: none;
     height: 100%;
@@ -267,6 +271,17 @@ article {
 
 #contentDisplay:focus {
     outline: none;
+}
+
+.tagBtn {
+  position: fixed;
+  margin-top: 5%;
+  margin-left: 12%;
+  border-radius: 10px;
+  padding: 10px;
+  border: none;
+  background: #282828;
+  color: white;
 }
 
 /* ----------------------------- Toolbar ---------------------------- */
@@ -365,10 +380,45 @@ article {
   width: 35%;
   padding-left: 1%;
   margin-left: 15%;
-  height: 7%;
+  height: 50px;
   transition: 0.3s;
   border-radius: 10px;
   border: none;
   font-size: 20px;
   background-color: var(--bg-secondary);
+}
+
+/* ----------------------------- Tag ---------------------------- */
+
+.tag {
+  position: fixed;
+  margin-top: 4.7%;
+  margin-left: 5%;
+}
+
+.tagDot {
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  margin-right: 10px;
+}
+
+.tagDot[color="0"] {
+  background: white;
+}
+
+.tagDot[color="1"] {
+  background: rgb(0,150,255);
+}
+
+.tagDot[color="2"] {
+  background: rgb(225, 54, 54);
+}
+
+.tagDot[color="3"] {
+  background: rgb(133, 18, 151);
+}
+
+.tagDot[color="4"] {
+  background: rgb(114, 241, 120);
 }

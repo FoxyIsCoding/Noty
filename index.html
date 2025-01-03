@@ -8,6 +8,9 @@
     <script src="https://kit.fontawesome.com/231816e55b.js" crossorigin="anonymous"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Roboto&display=swap');
+        body {
+            background-color: #1C1C1C;
+        }
     </style>
 </head>
 <body>
@@ -32,6 +35,7 @@
             <button title="ToDo" id="shortcut" onclick="openTodo()"><i class="fa-solid fa-check-square fa-xl"></i></button>
             <button onclick='alert("I was too lazy to code this 🙃")' title="Settings" id="shortcut"><i class="fa-solid fa-gear fa-xl"></i></button>
             <button onclick="resetLocalStorage()" title="Reset data" id="shortcut"><i class="fa-solid fa-rotate-right fa-xl"></i></button>
+            <button onclick='alert("Shortcuts: \n Work in progress. Comming next version.")' title="Keyboard shortcuts" id="shortcut"><i class="fa-regular fa-keyboard fa-xl"></i></button>
         </div>
         
         </div>  
@@ -40,6 +44,7 @@
             <input maxlength="30" value="Untitled" id="titleDisplay" readonly">
             <br><br><br>
             <textarea id="contentDisplay" placeholder="Write your note here..."></textarea>
+            <span class="tag" style="color: white;padding: 10px;font-size: 20px;">Importance:</span><button id="tagDisplay" class="tagBtn" onclick="changeTag(this)">Unset</button>
         </div>
         
         <section style="display: none;"id="todo">
