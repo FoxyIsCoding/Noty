@@ -422,3 +422,62 @@ article {
 .tagDot[color="4"] {
   background: rgb(114, 241, 120);
 }
+
+
+/* ----------------------------- Alerts ---------------------------- */
+#alertWindow {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--bg-secondary);
+  padding: 20px;
+  border-radius: 20px;
+  text-align: center;
+  color: white;
+  width: 20%;
+  height: 20%;
+  border: #131313 1px solid;
+  z-index: 1000;
+  display: none;
+  font-size: 10px;
+  transition: 1s;
+}
+
+.alertButtons button {
+  background: #1e1e1e;
+  border: none;
+  padding: 10px 20px;
+  box-shadow: 7px 8px 33px -11px #000000;
+  border-radius: 10px;
+  color: white;
+  font-size: 15px;
+  margin: 0 10px;
+  transition: 0.3s;
+}
+
+.alertButtons {
+  position: absolute;
+  bottom: 10%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 50%;
+  left: 50%;
+  justify-content: center;
+}
+
+.alertButtons button:hover {
+  background: #3c3c3c;
+}
+
+#alertInput {
+  background: var(--bg-primary);
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+  font-size: 15px;
+  margin: 0 10px;
+  transition: 1s;
+  width: 90%;
+}

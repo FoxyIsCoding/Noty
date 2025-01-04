@@ -76,8 +76,8 @@ function openNote(index) {
   document.getElementById("tagDisplay").innerText = notes[selectedNote].tag == 0 ? "Unset" : notes[selectedNote].tag == 1 ? "Uneeded" : notes[selectedNote].tag == 2 ? "Important" : notes[selectedNote].tag == 3 ? "Urgent" : "Done"
 }
 
-function removeNote() {
-  if (!confirm("Do you want to delete this note?") && notes.length > 0) {
+async function removeNote() {
+  if (!await alertUser("Do you whant to delete this note?") && notes.length > 0) {
     return;
   }
 
@@ -148,8 +148,8 @@ document.querySelectorAll("#todoList div").forEach((item,index)=>{
   })
 })
 
-document.getElementById("todoAdd").addEventListener("click", function() {
-  let name = prompt("Enter a new todo:")
+document.getElementById("todoAdd").addEventListener("click", async function() {
+  let name = await alertUser("Enter the name of the task",true,true)
   if (name) {
     doList.push([false,name])
     loadTodo()
@@ -157,21 +157,21 @@ document.getElementById("todoAdd").addEventListener("click", function() {
   }
 });
 
-function resetLocalStorage() {
-  const firstConfirmation = confirm("Are you sure you want to reset your local storage? This action cannot be undone.");
+async function resetLocalStorage() {
+  const firstConfirmation = await alertUser("This will delete all stored data in your browser. Do you want to proceed?");
   
   if (firstConfirmation) {
-      const secondConfirmation = confirm("This will delete all stored data in your browser. Do you want to proceed?");
+      const secondConfirmation = await alertUser("Are you sure you want to delete all data?");
       
       if (secondConfirmation) {
           localStorage.removeItem("notes");
-          alert("Local storage has been reset.");
+          await alertUser("Data was deleted")
           location.reload();
       } else {
-          alert("Action cancelled.");
+          await alertUser("Action cancelled.");
       }
   } else {
-      alert("Action cancelled.");
+      await alertUser("Action cancelled.");
   }
 }
 
@@ -207,3 +207,29 @@ document.getElementById("search").addEventListener("input", function() {
     }
   }
 });
+
+function alertUser(text, cancel = true, prompt = false) {
+  return new Promise((resolve) => {
+    document.getElementById("alertText").innerText = text;
+    document.getElementById("alertWindow").style.display = "block";
+    document.getElementById("alertCancel").style.display = cancel ? "block" : "none";
+    document.getElementById("alertInput").style.display = prompt ? "block" : "none";
+    document.getElementById("alertInput").value = "";
+
+    document.getElementById("alertOk").addEventListener("click", function handleOk() {
+      document.getElementById("alertWindow").style.display = "none";
+      if (prompt) {
+        resolve(document.getElementById("alertInput").value);
+      } else {
+        resolve(true);
+      }
+      document.getElementById("alertOk").removeEventListener("click", handleOk);
+    });
+
+    document.getElementById("alertCancel").addEventListener("click", function handleCancel() {
+      document.getElementById("alertWindow").style.display = "none";
+      resolve(false);
+      document.getElementById("alertCancel").removeEventListener("click", handleCancel);
+    });
+  });
+}

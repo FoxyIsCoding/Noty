@@ -60,6 +60,15 @@
         <i title="Settings" id="" onclick='alert("I was too lazy to code this 🙃")' style="color: white; margin-left: 10%; margin-top: 9%; cursor: pointer;" class="fa-solid fa-gear fa-xl"></i>
         <i title="Reset data" onclick="resetLocalStorage()" style="color: white; margin-left: 10%; margin-top: 9%; cursor: pointer;" class="fa-solid fa-rotate-right fa-xl"></i>
     </div>
+
+    <div id="alertWindow">
+        <h1 id="alertText"></h1>
+        <input autocomplete="off" type="text" id="alertInput">
+        <div class="alertButtons">
+            <button id="alertOk">OK</button>
+            <button id="alertCancel">Cancel</button>
+        </div>
+    </div>
 </body>
 </html>
 <script src="script.js"></script>
