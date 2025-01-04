@@ -27,10 +27,10 @@ function save() {
 function loadNotes() {
   document.getElementById("notesList").innerHTML = ""
   for (let i = 0;i<notes.length;i++) {
-    document.getElementById("notesList").innerHTML += `<span color="${notes[i].tag}" class="tagDot"></span><li draggable="true" ondblclick="removeNote()" onclick="openNote(${i})">${notes[i].title}</li>`
+    document.getElementById("notesList").innerHTML += `<div onclick="openNote(${i})"><span color="${notes[i].tag}" class="tagDot"></span><li draggable="true" ondblclick="removeNote()">${notes[i].title}</li></div>`
   }
 
-  document.querySelectorAll("#notesList li").forEach(item => {
+  document.querySelectorAll("#notesList div").forEach(item => {
     item.addEventListener("dragstart", function(e) {
       e.dataTransfer.setData("text", notes.indexOf(notes.find(note => note.title === e.target.textContent)))
     })
@@ -127,17 +127,18 @@ function changeTag(item) {
 }
 
 document.getElementById("titleDisplay").addEventListener("dblclick", function() {
-  this.removeAttribute("readonly")
-  this.onchange = function() {
-    notes[0].title = this.value
-    loadNotes()
-    this.setAttribute("readonly", true)
-    save()
-  }
+  this.removeAttribute("readonly") 
+})
+
+document.getElementById("titleDisplay").addEventListener("change", function() {
+  notes[selectedNote].title = this.value
+  this.setAttribute("readonly", true)
+  loadNotes()
+  save()
 })
 
 document.getElementById("contentDisplay").addEventListener("change", function() {
-  notes[0].note = this.value
+  notes[selectedNote].note = this.value
   save()
 })
 
@@ -190,7 +191,7 @@ function openTodo() {
 document.getElementById("search").addEventListener("input", function() {
   const query = this.value.toLowerCase();
   const notesList = document.getElementById("notesList");
-  const notes = notesList.getElementsByTagName("li");
+  const notes = notesList.getElementsByTagName("div");
 
   if (query === "") {
     for (let note of notes) {

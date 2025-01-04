@@ -58,31 +58,36 @@ html, body {
 }
 
 #notesList {
-    user-select: none;
-    list-style-type: none;
+    list-style: none;
     color: var(--text);
     max-height: 80%;
     overflow-y: auto;
-    display: grid;
-    grid-template-columns: 1fr 7fr;
-    grid-gap: 10px;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
-li {
+#notesList li {
     padding-left: 5%;
     padding-top: 5%;
     padding-bottom: 5%;
     transition: 0.3s;
+    margin-left: 10%;
 }
 
-li:hover {
-    margin-left: 5%;
+#notesList li:hover {
+    margin-left: 20%;
     cursor: pointer;
     background-color: #292929;
     border-top-left-radius: 9px;
     border-bottom-left-radius: 9px;
+}
 
+#notesList div {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 7fr 1fr;
+    align-items: center;
 }
 
 
@@ -397,10 +402,11 @@ article {
 }
 
 .tagDot {
+  /*opacity: 0; */
+  border-radius: 100%;
   width: 20px;
   height: 20px;
-  border-radius: 100%;
-  margin-right: 10px;
+  position: absolute;
 }
 
 .tagDot[color="0"] {
