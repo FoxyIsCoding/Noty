@@ -91,7 +91,7 @@ async function removeNote() {
 function loadTodo() {
   document.getElementById("todoList").innerHTML = ""
   for (let i = 0;i<doList.length;i++) {
-    document.getElementById("todoList").innerHTML += `<div><i class="${doList[i][0] ? "fa fa-check-square-o" : "fa fa-square-o"}"></i>${doList[i][1]}</div>`
+    document.getElementById("todoList").innerHTML += `<div draggable="true"><i class="${doList[i][0] ? "fa fa-check-square-o" : "fa fa-square-o"}"></i>${doList[i][1]}</div>`
   }
 
   document.querySelectorAll("#todoList div").forEach((item,index)=>{
@@ -99,6 +99,24 @@ function loadTodo() {
       doList.splice(index,1)
       loadTodo()
       save()
+    })
+
+    item.addEventListener("dragstart",function(e){
+      e.dataTransfer.setData("text", index)
+    })
+
+    item.addEventListener("dragover",function(e){
+      e.preventDefault()
+    })
+
+    item.addEventListener("drop",function(e){
+      const draggedIndex = e.dataTransfer.getData("text");
+      const droppedIndex = index;
+      const temp = doList[draggedIndex];
+      doList[draggedIndex] = doList[droppedIndex];
+      doList[droppedIndex] = temp;
+      loadTodo();
+      save();
     })
   })
 
@@ -166,13 +184,13 @@ async function resetLocalStorage() {
       
       if (secondConfirmation) {
           localStorage.removeItem("notes");
-          await alertUser("Data was deleted")
+          await alertUser("Data was deleted",false)
           location.reload();
       } else {
-          await alertUser("Action cancelled.");
+          await alertUser("Action cancelled.",false);
       }
   } else {
-      await alertUser("Action cancelled.");
+      await alertUser("Action cancelled.",false);
   }
 }
 
@@ -194,14 +212,12 @@ document.getElementById("search").addEventListener("input", function() {
   const notes = notesList.getElementsByTagName("div");
 
   if (query === "") {
-    for (let note of notes) {
-      note.style.display = "block";
-    }
+    loadNotes()
   } else {
     for (let note of notes) {
       const noteText = note.textContent.toLowerCase();
       if (noteText.includes(query)) {
-        note.style.display = "block";
+        note.style.display = "static";
       } else {
         note.style.display = "none";
       }
@@ -209,16 +225,31 @@ document.getElementById("search").addEventListener("input", function() {
   }
 });
 
+document.getElementById("keyboardBtn").addEventListener("click", async function () {
+  await alertUser("Shortcuts: <br> New note: nothing",false)
+})
+
+
 function alertUser(text, cancel = true, prompt = false) {
   return new Promise((resolve) => {
-    document.getElementById("alertText").innerText = text;
+    document.getElementById("alertText").innerHTML = text;
     document.getElementById("alertWindow").style.display = "block";
     document.getElementById("alertCancel").style.display = cancel ? "block" : "none";
     document.getElementById("alertInput").style.display = prompt ? "block" : "none";
     document.getElementById("alertInput").value = "";
+    document.getElementById("alertInput").focus()
+    document.getElementById("blur").style.display = "block"
+    document.getElementById("alertWindow").animate([
+      {transform: "translate(-50%,-50%) scale(0)"},
+      {transform: "translate(-50%,-50%) scale(1)"}
+    ],{
+      duration: 100,
+      fill: "forwards"
+    })
 
     document.getElementById("alertOk").addEventListener("click", function handleOk() {
       document.getElementById("alertWindow").style.display = "none";
+      document.getElementById("blur").style.display = "none"
       if (prompt) {
         resolve(document.getElementById("alertInput").value);
       } else {
@@ -229,6 +260,7 @@ function alertUser(text, cancel = true, prompt = false) {
 
     document.getElementById("alertCancel").addEventListener("click", function handleCancel() {
       document.getElementById("alertWindow").style.display = "none";
+      document.getElementById("blur").style.display = "none"
       resolve(false);
       document.getElementById("alertCancel").removeEventListener("click", handleCancel);
     });
