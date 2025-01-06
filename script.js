@@ -1,3 +1,4 @@
+import { cloudSave, cloudReset } from "./firebase.js"
 //variables
 let notes = []
 let selectedNote = null
@@ -20,6 +21,15 @@ function save() {
   data.notes = notes
   data.todo = doList
   localStorage.setItem("notes", JSON.stringify(data))
+  cloudSave(data.notes,data.todo)
+}
+
+async function resetData() {
+  if (await alertUser("What to delete all data?")) {
+    cloudReset()
+    localStorage.removeItem("notes")
+    location.reload()
+  }
 }
 
 
@@ -176,24 +186,6 @@ document.getElementById("todoAdd").addEventListener("click", async function() {
   }
 });
 
-async function resetLocalStorage() {
-  const firstConfirmation = await alertUser("This will delete all stored data in your browser. Do you want to proceed?");
-  
-  if (firstConfirmation) {
-      const secondConfirmation = await alertUser("Are you sure you want to delete all data?");
-      
-      if (secondConfirmation) {
-          localStorage.removeItem("notes");
-          await alertUser("Data was deleted",false)
-          location.reload();
-      } else {
-          await alertUser("Action cancelled.",false);
-      }
-  } else {
-      await alertUser("Action cancelled.",false);
-  }
-}
-
 document.getElementById("openDoList").addEventListener("click", function() {
   document.getElementById("createNote").style.display = "none"
   document.getElementById("todo").style.display = "block"
@@ -266,3 +258,11 @@ function alertUser(text, cancel = true, prompt = false) {
     });
   });
 }
+
+//window functions
+window.createNote = createNote;
+window.openNote = openNote;
+window.removeNote = removeNote;
+window.changeTag = changeTag;
+window.openTodo = openTodo;
+window.alertUser = alertUser;

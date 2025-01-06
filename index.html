@@ -6,6 +6,9 @@
     <title>Noty</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/231816e55b.js" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Roboto&display=swap');
         body {
@@ -16,7 +19,7 @@
 <body>
     <div id="sidebar">
         <button onclick="openNote(null)" id="home"><i style="color: white;" class="fa fa-home"></i></button>
-        <a class="addnote_btn" onclick="createNote()" ><i class="fa-solid fa-plus"></i>&nbsp; Add note</a> 
+        <a onclick="createNote()" class="addnote_btn"><i class="fa-solid fa-plus"></i>&nbsp; Add note</a> 
         <p></p><p></p>
         <hr class="solid">
         <br>
@@ -36,6 +39,7 @@
             <button onclick='alert("I was too lazy to code this 🙃")' title="Settings" id="shortcut"><i class="fa-solid fa-gear fa-xl"></i></button>
             <button onclick="resetLocalStorage()" title="Reset data" id="shortcut"><i class="fa-solid fa-rotate-right fa-xl"></i></button>
             <button id="keyboardBtn" title="Keyboard shortcuts"><i class="fa-regular fa-keyboard fa-xl"></i></button>
+            <button id="profile" title="Profile"><i class="fa-regular fa-user fa-xl"></i></button>
         </div>
         
         </div>  
@@ -58,7 +62,7 @@
         <i title="Remove note" onclick="removeNote()" style="color: white; margin-left: 30%; margin-top: 9%; cursor: pointer;" class="fa fa-trash fa-xl"></i>
         <i title="ToDo" id="openDoList" style="color: white; margin-left: 10%; margin-top: 9%; cursor: pointer;" class="fa-regular fa-check-square fa-xl"></i>
         <i title="Settings" id="" onclick='alert("I was too lazy to code this 🙃")' style="color: white; margin-left: 10%; margin-top: 9%; cursor: pointer;" class="fa-solid fa-gear fa-xl"></i>
-        <i title="Reset data" onclick="resetLocalStorage()" style="color: white; margin-left: 10%; margin-top: 9%; cursor: pointer;" class="fa-solid fa-rotate-right fa-xl"></i>
+        <i title="Reset data" onclick="resetData()" style="color: white; margin-left: 10%; margin-top: 9%; cursor: pointer;" class="fa-solid fa-rotate-right fa-xl"></i>
     </div>
 
     <div id="alertWindow">
@@ -72,4 +76,5 @@
     <div  id="blur"></div>
 </body>
 </html>
-<script src="script.js"></script>
+<script type="module" src="firebase.js"></script>
+<script type="module" src="script.js"></script>
