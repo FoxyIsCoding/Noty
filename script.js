@@ -1,28 +1,8 @@
 import { cloudSave, cloudReset } from "./firebase.js"
 //variables
-let notes = []
+export let notes = []
+export let doList = []
 let selectedNote = null
-let doList = []
-
-
-//save & load
-let data = {
-  notes: [],
-  todo: []
-}
-
-if (localStorage.getItem("notes")) {
-  data = JSON.parse(localStorage.getItem("notes"))
-  notes = data.notes
-  doList = data.todo
-}
-
-function save() {
-  data.notes = notes
-  data.todo = doList
-  localStorage.setItem("notes", JSON.stringify(data))
-  cloudSave(data.notes,data.todo)
-}
 
 async function resetData() {
   if (await alertUser("What to delete all data?")) {
@@ -33,8 +13,8 @@ async function resetData() {
 }
 
 
-//functions
-function loadNotes() {
+//notes
+export function loadNotes() {
   document.getElementById("notesList").innerHTML = ""
   for (let i = 0;i<notes.length;i++) {
     document.getElementById("notesList").innerHTML += `<div onclick="openNote(${i})"><span color="${notes[i].tag}" class="tagDot"></span><li draggable="true" ondblclick="removeNote()">${notes[i].title}</li></div>`
@@ -55,7 +35,7 @@ function loadNotes() {
       notes[droppedIndex] = temp
       selectedNote = droppedIndex
       loadNotes()
-      save()
+      cloudSave()
     })
   })
 }
@@ -65,9 +45,9 @@ function createNote() {
   document.getElementById("homePage").style.display = "none"
   document.getElementById("todo").style.display = "no"
   document.getElementById("createNote").style.display = "block"
-  notes.unshift({"title":"Untitled","note":"","tag":0})
+  notes.unshift({title:"Untitled",note:"",tag:0})
   loadNotes()
-  save()
+  cloudSave()
   openNote(0)
 }
 
@@ -95,10 +75,12 @@ async function removeNote() {
   notes.splice(selectedNote, 1);
   openNote(null);
   loadNotes();
-  save();
+  cloudSave()
 }
 
-function loadTodo() {
+
+//todo
+export function loadTodo() {
   document.getElementById("todoList").innerHTML = ""
   for (let i = 0;i<doList.length;i++) {
     document.getElementById("todoList").innerHTML += `<div draggable="true"><i class="${doList[i][0] ? "fa fa-check-square-o" : "fa fa-square-o"}"></i>${doList[i][1]}</div>`
@@ -108,7 +90,7 @@ function loadTodo() {
     item.addEventListener("dblclick",function(){
       doList.splice(index,1)
       loadTodo()
-      save()
+      cloudSave()
     })
 
     item.addEventListener("dragstart",function(e){
@@ -126,7 +108,7 @@ function loadTodo() {
       doList[draggedIndex] = doList[droppedIndex];
       doList[droppedIndex] = temp;
       loadTodo();
-      save();
+      cloudSave()
     })
   })
 
@@ -134,7 +116,7 @@ function loadTodo() {
     item.addEventListener("click",function(){
       doList[index][0] = !doList[index][0]
       loadTodo()
-      save()
+      cloudSave()
     })
   })
 }
@@ -151,7 +133,7 @@ function changeTag(item) {
   else if (notes[selectedNote].tag == 3) {item.innerText = "Urgent"}
   else if (notes[selectedNote].tag == 4) {item.innerText = "Done"}
   loadNotes()
-  save()
+  cloudSave()
 }
 
 document.getElementById("titleDisplay").addEventListener("dblclick", function() {
@@ -162,12 +144,12 @@ document.getElementById("titleDisplay").addEventListener("change", function() {
   notes[selectedNote].title = this.value
   this.setAttribute("readonly", true)
   loadNotes()
-  save()
+  cloudSave()
 })
 
 document.getElementById("contentDisplay").addEventListener("change", function() {
   notes[selectedNote].note = this.value
-  save()
+  cloudSave()
 })
 
 document.querySelectorAll("#todoList div").forEach((item,index)=>{
@@ -181,8 +163,7 @@ document.getElementById("todoAdd").addEventListener("click", async function() {
   let name = await alertUser("Enter the name of the task",true,true)
   if (name) {
     doList.push([false,name])
-    loadTodo()
-    save()
+    cloudSave()
   }
 });
 
@@ -266,3 +247,4 @@ window.removeNote = removeNote;
 window.changeTag = changeTag;
 window.openTodo = openTodo;
 window.alertUser = alertUser;
+window.resetData = resetData

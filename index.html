@@ -17,6 +17,7 @@
     </style>
 </head>
 <body>
+    <button id="profile" title="Profile"><i class="fa-regular fa-user fa-xl"></i></button>
     <div id="sidebar">
         <button onclick="openNote(null)" id="home"><i style="color: white;" class="fa fa-home"></i></button>
         <a onclick="createNote()" class="addnote_btn"><i class="fa-solid fa-plus"></i>&nbsp; Add note</a> 
@@ -37,9 +38,9 @@
             <button onclick="createNote()" title="Add note" id="shortcut"><i class="fa-solid fa-plus fa-xl"></i></button>
             <button title="ToDo" id="shortcut" onclick="openTodo()"><i class="fa-solid fa-check-square fa-xl"></i></button>
             <button onclick='alert("I was too lazy to code this 🙃")' title="Settings" id="shortcut"><i class="fa-solid fa-gear fa-xl"></i></button>
-            <button onclick="resetLocalStorage()" title="Reset data" id="shortcut"><i class="fa-solid fa-rotate-right fa-xl"></i></button>
+            <button onclick="resetData()" title="Reset data" id="shortcut"><i class="fa-solid fa-rotate-right fa-xl"></i></button>
             <button id="keyboardBtn" title="Keyboard shortcuts"><i class="fa-regular fa-keyboard fa-xl"></i></button>
-            <button id="profile" title="Profile"><i class="fa-regular fa-user fa-xl"></i></button>
+            
         </div>
         
         </div>  
@@ -69,7 +70,7 @@
         <h1 id="alertText"></h1>
         <input autocomplete="off" type="text" id="alertInput">
         <div class="alertButtons">
-            <button id="alertOk">OK</button>
+            <button id="alertOk" autofocus>OK</button>
             <button id="alertCancel">Cancel</button>
         </div>
     </div>

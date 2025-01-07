@@ -509,3 +509,29 @@ article {
   backdrop-filter: blur(5px);
   display: none;
 }
+
+#profile img{
+  border-radius: 50%;
+  height: 50%;
+  width: 50%;
+  box-shadow: 7px 8px 33px -11px #000000;
+}
+
+
+#profile {
+  position: fixed;
+  top: 4%;
+  right: 2%;
+  background-color: var(--bg-primary);
+  border-radius: 10px;
+  border: none;
+  display: inline-flex;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 15px;
+  padding: 1% 1%;
+  text-decoration: none;
+  transition: 0.3s;
+  user-select: none;
+}
