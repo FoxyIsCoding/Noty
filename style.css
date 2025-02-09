@@ -86,7 +86,7 @@ html, body {
 #notesList div {
     width: 100%;
     display: grid;
-    grid-template-columns: 7fr 1fr;
+    grid-template-columns: 1fr 10fr;
     align-items: center;
 }
 
@@ -213,6 +213,7 @@ ul {
     --sb-track-color: #1e1e1e;
     --sb-thumb-color: #282828;
     --sb-size: 14px;
+    overflow: visible;
   }
   
   textarea::-webkit-scrollbar {
@@ -233,7 +234,7 @@ ul {
   @supports not selector(::-webkit-scrollbar) {
     textarea {
       scrollbar-color: var(--sb-thumb-color)
-                       var(--sb-track-color);
+                       var (--sb-track-color);
     }
   }
 
@@ -248,14 +249,14 @@ article {
 
 #titleDisplay {
     position: fixed;
-    color: var(--text);
+    color: rgb(255, 246, 255);
     font-size: 30px;
     margin-left: 5%;
     margin-top: 5%;
     background-color: var(--bg-primary);
     border: none;
     font-family: 'Hammersmith One';
-    border-bottom: 2px solid rgb(255, 255, 255);
+    border-bottom: 2px solid rgb(255, 246, 246);
 }
 
 #titleDisplay:focus {
@@ -263,6 +264,7 @@ article {
 }
 
 #contentDisplay {
+    overflow: visible;
     position: fixed;
     color: var(--text);
     font-size: 20px;
@@ -374,7 +376,7 @@ article {
 #shortcuts {
   margin-top: 6%;
   position: fixed;
-  color: var(--text);
+  color: var (--text);
   width: 240px;
   height: 200px;
   margin-left: 28%;
@@ -412,7 +414,7 @@ article {
   border-radius: 100%;
   width: 20px;
   height: 20px;
-  position: absolute;
+  position: static;
 }
 
 .tagDot[color="0"] {

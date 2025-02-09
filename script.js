@@ -1,14 +1,13 @@
-import { cloudSave, cloudReset } from "./firebase.js"
+import { cloudSave, cloudReset, change } from "./firebase.js"
 //variables
 export let notes = []
 export let doList = []
+export let changes = []
 let selectedNote = null
 
 async function resetData() {
   if (await alertUser("What to delete all data?")) {
     cloudReset()
-    localStorage.removeItem("notes")
-    location.reload()
   }
 }
 
@@ -34,6 +33,7 @@ export function loadNotes() {
       notes[draggedIndex] = notes[droppedIndex]
       notes[droppedIndex] = temp
       selectedNote = droppedIndex
+      change(["moveNote", draggedIndex, droppedIndex])
       loadNotes()
       cloudSave()
     })
@@ -46,6 +46,7 @@ function createNote() {
   document.getElementById("todo").style.display = "no"
   document.getElementById("createNote").style.display = "block"
   notes.unshift({title:"Untitled",note:"",tag:0})
+  change(["createNote"])
   loadNotes()
   cloudSave()
   openNote(0)
@@ -67,30 +68,67 @@ function openNote(index) {
 }
 
 async function removeNote() {
+  if (selectedNote == null) return
   if (!await alertUser("Do you whant to delete this note?") && notes.length > 0) {
     return;
   }
 
   document.getElementById("createNote").style.display = "none";
   notes.splice(selectedNote, 1);
+  change(["removeNote", selectedNote])
   openNote(null);
   loadNotes();
   cloudSave()
 }
+
+function changeTag(item) {
+  notes[selectedNote].tag += 1
+  if (notes[selectedNote].tag > 4) {
+    notes[selectedNote].tag = 0
+  }
+  if (notes[selectedNote].tag == 0) {item.innerText = "Unset"}
+  else if (notes[selectedNote].tag == 1) {item.innerText = "Uneeded"}
+  else if (notes[selectedNote].tag == 2) {item.innerText = "Important"}
+  else if (notes[selectedNote].tag == 3) {item.innerText = "Urgent"}
+  else if (notes[selectedNote].tag == 4) {item.innerText = "Done"}
+  change(["changeTag", selectedNote, notes[selectedNote].tag])
+  loadNotes()
+  cloudSave()
+}
+
+document.getElementById("titleDisplay").addEventListener("dblclick", function() {
+  this.removeAttribute("readonly") 
+})
+
+document.getElementById("titleDisplay").addEventListener("change", function() {
+  notes[selectedNote].title = this.value
+  this.setAttribute("readonly", true)
+  change(["renameNote", selectedNote, notes[selectedNote].title])
+  loadNotes()
+  cloudSave()
+})
+
+document.getElementById("contentDisplay").addEventListener("input", function() {
+  notes[selectedNote].note = this.value
+  change(["editNote", selectedNote, notes[selectedNote].note])
+  cloudSave()
+})
 
 
 //todo
 export function loadTodo() {
   document.getElementById("todoList").innerHTML = ""
   for (let i = 0;i<doList.length;i++) {
-    document.getElementById("todoList").innerHTML += `<div draggable="true"><i class="${doList[i][0] ? "fa fa-check-square-o" : "fa fa-square-o"}"></i>${doList[i][1]}</div>`
+    document.getElementById("todoList").innerHTML += `<div draggable="true"><i class="${doList[i].done ? "fa fa-check-square-o" : "fa fa-square-o"}"></i>${doList[i].name}</div>`
   }
 
   document.querySelectorAll("#todoList div").forEach((item,index)=>{
-    item.addEventListener("dblclick",function(){
+    item.addEventListener("dblclick",async function(){
+      if (!await alertUser("Do you whant to delete this task?")) return
       doList.splice(index,1)
-      loadTodo()
+      change(["removeTodo", index])
       cloudSave()
+      loadTodo()
     })
 
     item.addEventListener("dragstart",function(e){
@@ -107,50 +145,31 @@ export function loadTodo() {
       const temp = doList[draggedIndex];
       doList[draggedIndex] = doList[droppedIndex];
       doList[droppedIndex] = temp;
-      loadTodo();
+      change(["moveTodo", draggedIndex, droppedIndex])
       cloudSave()
+      loadTodo()
     })
   })
 
   document.querySelectorAll("#todoList div i").forEach((item,index)=>{
     item.addEventListener("click",function(){
-      doList[index][0] = !doList[index][0]
-      loadTodo()
+      doList[index].done = !doList[index].done
+      change(["toggleTodo", index])
       cloudSave()
+      loadTodo()
     })
   })
 }
-loadTodo()
 
-function changeTag(item) {
-  notes[selectedNote].tag += 1
-  if (notes[selectedNote].tag > 4) {
-    notes[selectedNote].tag = 0
+async function createTodo() {
+  let name = await alertUser("Enter the name of the task",true,true)
+  if (name) {
+    doList.push({name:name,done:false})
+    change(["createTodo"])
+    cloudSave()
+    loadTodo()
   }
-  if (notes[selectedNote].tag == 0) {item.innerText = "Unset"}
-  else if (notes[selectedNote].tag == 1) {item.innerText = "Uneeded"}
-  else if (notes[selectedNote].tag == 2) {item.innerText = "Important"}
-  else if (notes[selectedNote].tag == 3) {item.innerText = "Urgent"}
-  else if (notes[selectedNote].tag == 4) {item.innerText = "Done"}
-  loadNotes()
-  cloudSave()
 }
-
-document.getElementById("titleDisplay").addEventListener("dblclick", function() {
-  this.removeAttribute("readonly") 
-})
-
-document.getElementById("titleDisplay").addEventListener("change", function() {
-  notes[selectedNote].title = this.value
-  this.setAttribute("readonly", true)
-  loadNotes()
-  cloudSave()
-})
-
-document.getElementById("contentDisplay").addEventListener("change", function() {
-  notes[selectedNote].note = this.value
-  cloudSave()
-})
 
 document.querySelectorAll("#todoList div").forEach((item,index)=>{
   item.querySelector("i").addEventListener("click",function(){
@@ -159,26 +178,14 @@ document.querySelectorAll("#todoList div").forEach((item,index)=>{
   })
 })
 
-document.getElementById("todoAdd").addEventListener("click", async function() {
-  let name = await alertUser("Enter the name of the task",true,true)
-  if (name) {
-    doList.push([false,name])
-    cloudSave()
-  }
-});
-
-document.getElementById("openDoList").addEventListener("click", function() {
-  document.getElementById("createNote").style.display = "none"
-  document.getElementById("todo").style.display = "block"
-  document.getElementById("homePage").style.display = "none"
-})
-
 function openTodo() {
   document.getElementById("createNote").style.display = "none"
   document.getElementById("todo").style.display = "block"
   document.getElementById("homePage").style.display = "none"
 }
 
+
+//other
 document.getElementById("search").addEventListener("input", function() {
   const query = this.value.toLowerCase();
   const notesList = document.getElementById("notesList");
@@ -199,7 +206,7 @@ document.getElementById("search").addEventListener("input", function() {
 });
 
 document.getElementById("keyboardBtn").addEventListener("click", async function () {
-  await alertUser("Shortcuts: <br> New note: nothing",false)
+  await alertUser("Shortcuts: <br><br> New note: n <br> Todo List: t",false)
 })
 
 
@@ -240,6 +247,25 @@ function alertUser(text, cancel = true, prompt = false) {
   });
 }
 
+// ------------------------------------------ Shortcuts ------------------------------------------
+
+
+// TODO
+document.addEventListener('keyup', function(event) {
+  if (event.key === 't' && !document.activeElement.matches('input, textarea, select')) {
+    openTodo()
+  }
+});
+
+
+// NOTES
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'n' && !document.activeElement.matches('input, textarea, select')) {
+    createNote()
+  }
+});
+
+
 //window functions
 window.createNote = createNote;
 window.openNote = openNote;
@@ -248,3 +274,4 @@ window.changeTag = changeTag;
 window.openTodo = openTodo;
 window.alertUser = alertUser;
 window.resetData = resetData
+window.createTodo = createTodo

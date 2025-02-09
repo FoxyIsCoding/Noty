@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Noty</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="icon.png" type="image/x-icon">
     <script src="https://kit.fontawesome.com/231816e55b.js" crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
@@ -55,13 +56,13 @@
         <section style="display: none;"id="todo">
             <h2>Your Todo List</h2>
             <h5 style="color: antiquewhite;"><i class="fa-solid fa-circle-info"></i> Tip: Double click to delete item</h5>
-            <button id="todoAdd" onclick="addCheckmark()"><i class="fa fa-plus"></i> Add</button>
+            <button id="todoAdd" onclick="createTodo()"><i class="fa fa-plus"></i> Add</button>
             <div id="todoList"></div>
         </section>
     </article>
     <div id="toolbar">
         <i title="Remove note" onclick="removeNote()" style="color: white; margin-left: 30%; margin-top: 9%; cursor: pointer;" class="fa fa-trash fa-xl"></i>
-        <i title="ToDo" id="openDoList" style="color: white; margin-left: 10%; margin-top: 9%; cursor: pointer;" class="fa-regular fa-check-square fa-xl"></i>
+        <i title="ToDo" onclick="openTodo()" style="color: white; margin-left: 10%; margin-top: 9%; cursor: pointer;" class="fa-regular fa-check-square fa-xl"></i>
         <i title="Settings" id="" onclick='alert("I was too lazy to code this 🙃")' style="color: white; margin-left: 10%; margin-top: 9%; cursor: pointer;" class="fa-solid fa-gear fa-xl"></i>
         <i title="Reset data" onclick="resetData()" style="color: white; margin-left: 10%; margin-top: 9%; cursor: pointer;" class="fa-solid fa-rotate-right fa-xl"></i>
     </div>
