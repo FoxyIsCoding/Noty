@@ -1,8 +1,8 @@
 /* ----------------------------- Variables ------------------------------- */
 :root {
-    --bg-primary: #1C1C1C;
-    --bg-secondary: #232323;
-    --bg-hover: #1a1919;
+    --bg-primary: #141414;
+    --bg-secondary: #161616;
+    --bg-hover: #181818;
     --text: #fff;
   }
   
@@ -51,6 +51,7 @@ html, body {
     height: 98%;
     width: 20%;
     background-color: var(--bg-secondary);
+    backdrop-filter: blur(50px);
     border-radius: 10px;
     -webkit-box-shadow: 23px 26px 40px -34px rgba(0,0,0,0.75);
     -moz-box-shadow: 23px 26px 40px -34px rgba(0,0,0,0.75);
@@ -98,7 +99,7 @@ html, body {
     margin-top: 5%;
     margin-left: 5%;
 	box-shadow: 7px 8px 33px -11px #000000;
-	background-color:#201e1e;
+	background-color:#121111;
 	border-radius:28px;
 	border:1px solid #1b1c1b;
 	display: inline-flex;
@@ -128,7 +129,7 @@ hr.solid {
     margin-top: 5%;
     margin-left: 5%;
 	box-shadow: 7px 8px 33px -11px #000000;
-	background-color:#201e1e;
+	background-color:#121111;
 	border-radius:28px;
 	border:1px solid #1b1c1b;
 	display: inline-flex;
@@ -153,9 +154,9 @@ hr.solid {
   margin-top: 7%;
   margin-left: 7%;
   box-shadow: 7px 8px 33px -11px #000000;
-  background-color:#201e1e;
-  border-radius:10px;
-  border:1px solid #1b1c1b;
+	background-color:#121111;
+	border-radius:10px;
+	border:1px solid #1b1c1b;
   display: inline-flex;
   cursor:pointer;
   color:#ffffff;
@@ -284,10 +285,10 @@ article {
   position: fixed;
   margin-top: 5%;
   margin-left: 12%;
-  border-radius: 10px;
   padding: 10px;
   border: none;
-  background: #282828;
+  background-color:#121111;
+	border-radius:10px;
   color: white;
 }
 
@@ -395,10 +396,11 @@ article {
   margin-left: 15%;
   height: 50px;
   transition: 0.3s;
-  border-radius: 10px;
+  border-radius: 15px;
   border: none;
   font-size: 20px;
-  background-color: var(--bg-secondary);
+  background-color:#121111;
+	border:1px solid #1b1c1b;
 }
 
 /* ----------------------------- Tag ---------------------------- */
@@ -461,9 +463,9 @@ article {
 .alertButtons button {
   background: #1e1e1e;
   border: none;
-  padding: 10px 20px;
-  box-shadow: 7px 8px 33px -11px #000000;
-  border-radius: 10px;
+  padding: 13px 30px;
+  box-shadow: 10px 10px 33px -11px #000000;
+  border-radius: 18px;
   color: white;
   font-size: 15px;
   margin: 0 10px;
@@ -477,16 +479,16 @@ article {
 
 .alertButtons {
   position: absolute;
-  bottom: 10%;
+  bottom: 20%;
   transform: translateX(-50%);
   display: flex;
-  gap: 50%;
+  gap: 20%;
   left: 50%;
   justify-content: center;
 }
 
 .alertButtons button:hover {
-  background: #3c3c3c;
+  background: #313131;
 }
 
 #alertInput {
@@ -501,24 +503,21 @@ article {
   width: 90%;
 }
 
-#blur {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 999;
-  backdrop-filter: blur(5px);
-  display: none;
-}
 
-#profile img{
+/* ----------------------------- Profile ---------------------------- */
+
+#profile img {
   border-radius: 50%;
-  height: 50%;
-  width: 50%;
+  height: 100%;
+  width: 100%;
   box-shadow: 7px 8px 33px -11px #000000;
 }
 
+#profile i {
+  width: 100%;
+  height: 100%;
+  color: white;
+}
 
 #profile {
   position: fixed;
@@ -527,13 +526,31 @@ article {
   background-color: var(--bg-primary);
   border-radius: 10px;
   border: none;
-  display: inline-flex;
+  display: flex;
   cursor: pointer;
-  color: #ffffff;
-  font-family: Arial;
-  font-size: 15px;
-  padding: 1% 1%;
-  text-decoration: none;
-  transition: 0.3s;
+  align-items: center;
+  justify-content: center;
   user-select: none;
+  margin: 0;
+  padding: 0;
+  width: 50px;
+  height: 50px;
+}
+
+/* setting screen */
+#settingScreen {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border-radius: 20px;
+  color: white;
+  width: 30%;
+  height: 50%;
+  font-size: 10px;
+  z-index: 100;
+  font-size: 20px;
+  background: var(--bg-secondary);
+  display: none;
 }

@@ -69,7 +69,7 @@ function openNote(index) {
 
 async function removeNote() {
   if (selectedNote == null) return
-  if (!await alertUser("Do you whant to delete this note?") && notes.length > 0) {
+  if (!await alertUser("Do you want to delete this note?") && notes.length > 0) {
     return;
   }
 
@@ -124,7 +124,7 @@ export function loadTodo() {
 
   document.querySelectorAll("#todoList div").forEach((item,index)=>{
     item.addEventListener("dblclick",async function(){
-      if (!await alertUser("Do you whant to delete this task?")) return
+      if (!await alertUser("Do you want to delete this task?")) return
       doList.splice(index,1)
       change(["removeTodo", index])
       cloudSave()
@@ -217,19 +217,17 @@ function alertUser(text, cancel = true, prompt = false) {
     document.getElementById("alertCancel").style.display = cancel ? "block" : "none";
     document.getElementById("alertInput").style.display = prompt ? "block" : "none";
     document.getElementById("alertInput").value = "";
-    document.getElementById("alertInput").focus()
-    document.getElementById("blur").style.display = "block"
+    document.getElementById("alertInput").focus();
     document.getElementById("alertWindow").animate([
       {transform: "translate(-50%,-50%) scale(0)"},
       {transform: "translate(-50%,-50%) scale(1)"}
     ],{
       duration: 100,
       fill: "forwards"
-    })
+    });
 
     document.getElementById("alertOk").addEventListener("click", function handleOk() {
       document.getElementById("alertWindow").style.display = "none";
-      document.getElementById("blur").style.display = "none"
       if (prompt) {
         resolve(document.getElementById("alertInput").value);
       } else {
@@ -240,7 +238,6 @@ function alertUser(text, cancel = true, prompt = false) {
 
     document.getElementById("alertCancel").addEventListener("click", function handleCancel() {
       document.getElementById("alertWindow").style.display = "none";
-      document.getElementById("blur").style.display = "none"
       resolve(false);
       document.getElementById("alertCancel").removeEventListener("click", handleCancel);
     });
@@ -264,6 +261,20 @@ document.addEventListener('keydown', function(event) {
     createNote()
   }
 });
+
+
+// ------------------------------------------ Settings ------------------------------------------
+document.getElementById("settingOpenBtn").addEventListener("click", function() {
+  document.getElementById("settingScreen").style.display = "block"
+  setTimeout(() => {
+    document.addEventListener("click",function close(e) {
+      if (e.target.id != "settingScreen") {
+        document.getElementById("settingScreen").style.display = "none"
+        document.removeEventListener("click",close)
+      }
+    })
+  })
+})
 
 
 //window functions

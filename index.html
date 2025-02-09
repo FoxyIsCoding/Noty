@@ -12,13 +12,10 @@
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Roboto&display=swap');
-        body {
-            background-color: #1C1C1C;
-        }
     </style>
 </head>
 <body>
-    <button id="profile" title="Profile"><i class="fa-regular fa-user fa-xl"></i></button>
+    <button id="profile" title="Profile"><i class="fa-regular fa-user fa-2xl" style="margin-top: 60%;"></i></button>
     <div id="sidebar">
         <button onclick="openNote(null)" id="home"><i style="color: white;" class="fa fa-home"></i></button>
         <a onclick="createNote()" class="addnote_btn"><i class="fa-solid fa-plus"></i>&nbsp; Add note</a> 
@@ -38,7 +35,7 @@
         <div id="shortcuts">
             <button onclick="createNote()" title="Add note" id="shortcut"><i class="fa-solid fa-plus fa-xl"></i></button>
             <button title="ToDo" id="shortcut" onclick="openTodo()"><i class="fa-solid fa-check-square fa-xl"></i></button>
-            <button onclick='alert("I was too lazy to code this 🙃")' title="Settings" id="shortcut"><i class="fa-solid fa-gear fa-xl"></i></button>
+            <button id="settingOpenBtn" title="Settings" id="shortcut"><i class="fa-solid fa-gear fa-xl"></i></button>
             <button onclick="resetData()" title="Reset data" id="shortcut"><i class="fa-solid fa-rotate-right fa-xl"></i></button>
             <button id="keyboardBtn" title="Keyboard shortcuts"><i class="fa-regular fa-keyboard fa-xl"></i></button>
             
@@ -63,7 +60,6 @@
     <div id="toolbar">
         <i title="Remove note" onclick="removeNote()" style="color: white; margin-left: 30%; margin-top: 9%; cursor: pointer;" class="fa fa-trash fa-xl"></i>
         <i title="ToDo" onclick="openTodo()" style="color: white; margin-left: 10%; margin-top: 9%; cursor: pointer;" class="fa-regular fa-check-square fa-xl"></i>
-        <i title="Settings" id="" onclick='alert("I was too lazy to code this 🙃")' style="color: white; margin-left: 10%; margin-top: 9%; cursor: pointer;" class="fa-solid fa-gear fa-xl"></i>
         <i title="Reset data" onclick="resetData()" style="color: white; margin-left: 10%; margin-top: 9%; cursor: pointer;" class="fa-solid fa-rotate-right fa-xl"></i>
     </div>
 
@@ -71,11 +67,14 @@
         <h1 id="alertText"></h1>
         <input autocomplete="off" type="text" id="alertInput">
         <div class="alertButtons">
-            <button id="alertOk" autofocus>OK</button>
+            <button id="alertOk" autofocus></i>OK</button>
             <button id="alertCancel">Cancel</button>
         </div>
     </div>
-    <div  id="blur"></div>
+
+    <div id="settingScreen">
+        Hello foxy
+    </div>
 </body>
 </html>
 <script type="module" src="firebase.js"></script>
