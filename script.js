@@ -286,3 +286,6 @@ window.openTodo = openTodo;
 window.alertUser = alertUser;
 window.resetData = resetData
 window.createTodo = createTodo
+
+
+if (navigator.)
