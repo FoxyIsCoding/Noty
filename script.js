@@ -288,4 +288,8 @@ window.resetData = resetData
 window.createTodo = createTodo
 
 
-if (navigator.)
+setInterval(() => {
+  if (navigator.onLine) {
+    alertUser("You are online, to conti")
+  }
+})
